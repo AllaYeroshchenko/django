@@ -29,7 +29,8 @@ class Education(models.Model):
 class Experience(models.Model):
 	resume_id=models.ForeignKey(Resume, on_delete=models.CASCADE, null=True)
 	position=models.CharField("Position", max_length=70, null=True)
-	organization_name=models.CharField("Organization", max_length=70, null=True)
+	company_name=models.CharField("Organization", max_length=70, null=True)
+	description=models.CharField("Description", max_length=70, null=True)
 	start_date=models.DateTimeField("Start date", null=True)
 	end_date=models.DateTimeField("End date", null=True)
 

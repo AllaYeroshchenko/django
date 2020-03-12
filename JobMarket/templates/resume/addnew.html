@@ -37,7 +37,7 @@
 	<p>Education</p>
 	<div id="education" name="education" class="education">
 		<label for="year_start">Year start</label>
-		<input type="date" name="year_start" id="year_start" max="01/01/2100" min="01/01/1980" required>
+		<input type="date" name="year_start" id="year_start" min="1980-01-01" required>
 		<label for="year_end">Year end</label>
 		<input type="date" name="year_end" id="year_end" required><br>
 		<label for="organization">Organization</label>
@@ -48,6 +48,20 @@
 		<input type="text" name="description" id="description" required><br>
 	</div>
 	<button class='edu' id="edu" name='edu'>Add education</button><br><br>
+	<p>Experience</p>
+	<div id="experience" name="experience" class="experience">
+		<label for="ex_year_start">Year start</label>
+		<input type="date" name="ex_year_start" id="ex_year_start" min="1980-01-01" required>
+		<label for="ex_year_end">Year end</label>
+		<input type="date" name="ex_year_end" id="ex_year_end" required><br>
+		<label for="company">Company</label>
+		<input type="text" name="company" id="company" required>
+		<label for="position">Position</label>
+		<input type="text" name="position" id="position" required><br>
+		<label for="ex_description">Description</label>
+		<input type="text" name="ex_description" id="ex_description" required><br>
+	</div>
+	<button class='exp' id="exp" name='exp'>Add experience</button><br><br>
 	<input type="submit" value="Add resume">
 </form>
 {% endif %}
