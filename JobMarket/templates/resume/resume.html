@@ -1,11 +1,18 @@
 {% extends 'base.html' %}
 
-{% block title %}Job Market{% endblock %}
+{% block title %}Resume{% endblock %}
 
 {% block content %}
-
-<h1>Resume</h1>
-<br><br>
-<a href="{% url 'resume:addnew' %}">Add new resume</a>
+<section class="main_section">
+	<div class="content">
+		<div class="content_inner">
+			<h1>Resume</h1>
+			<a href="{% url 'resume:addnew' %}">Add new resume</a>
+	</div></div>
+	<div class="addition_information">
+		<div class="addition_information_inner">
+			<p>Place for addition information.</p>
+	</div></div>
+</section> 
 
 {% endblock %}

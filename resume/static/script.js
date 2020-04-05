@@ -29,3 +29,12 @@ btn_exp.addEventListener('click', function(){
 	form_for_resume.insertBefore(exp_box, btn_exp);
 
 })
+
+
+$( document ).ready(function() {
+function delete_education(){
+	alert("ffff");
+ //console.log(this)
+
+}
+});

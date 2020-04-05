@@ -3,66 +3,209 @@
 {% block title %}Add new resume{% endblock %}
 
 {% block content %}
+<section class="main_section">
+	<div class="content">
+		<div class="content_inner">
+			<h1>Add new resume</h1>
+			{% if status %}
+			<p>{{ status }}</p>
+			{% else %}
+			<form id="add_new_resume" action="{% url 'resume:addnew' %}" method="post">
+				{% csrf_token %}
+				<table class="table_for_forms">
+					<tr>
+						<td class="first_col">
+							<label for="first_name">First name</label>
+						</td>
+						<td class="second_col">
+							<input type="text" name="first_name" id="first_name" size="40" required>
+						</td>
+					</tr>
+					<tr>
+						<td class="first_col">
+							<label for="last_name">Last name</label>
+						</td>
+						<td class="second_col">
+							<input type="text" name="last_name" id="last_name"  size="60" required>
+						</td>
+					</tr>
+					<tr>
+						<td class="first_col">
+							<label for="email">E-mail</label>
+						</td>
+						<td class="second_col">
+							<input type="text" name="email" id="email"  size="50" required>
+						</td>
+					</tr>
+					<tr>
+						<td class="first_col">
+							<label for="phone">Phone</label>
+						</td>
+						<td class="second_col">
+							<input type="text" name="phone" id="phone" size="20" placeholder="+1-(XXX)-XXX-XX-XX" pattern="+1-([0-9]{3})-[0-9]{3}-[0-9]{2}-[0-9]{2}" required>
+						</td>
+					</tr>
+					<tr>
+						<td class="first_col">
+							<label for="address">Address</label>
+						</td>
+						<td class="second_col">
+							<input type="text" name="address" id="address" size="90" required>
+						</td>
+					</tr>
+					<tr>
+						<td class="first_col">
+							<label for="city">City</label>
+						</td>
+						<td class="second_col">
+							<input type="text" name="city" id="city" size="60" required>
+						</td>
+					</tr>
+					<tr>
+						<td class="first_col">
+							<label for="state">State</label>
+						</td>
+						<td class="second_col">
+							<input type="text" name="state" id="state" size="60" required>
+						</td>
+					</tr>
+					<tr>
+						<td class="first_col">
+							<label for="country">Country</label>
+						</td>
+						<td class="second_col">
+							<input type="text" name="country" id="country" size="60" required>
+						</td>
+					</tr>
+					<tr>
+						<td class="first_col">
+							<label for="zip_code">Zip code</label>
+						</td>
+						<td class="second_col">
+							<input type="text" name="zip_code" id="zip_code" size="7" maxlength="5" required>
+						</td>
+					</tr>
+					<tr>
+						<td class="first_col">
+							<label for="job_title">Job title</label>
+						</td>
+						<td class="second_col">
+							<input type="text" name="job_title" id="job_title" size="90" required>
+						</td>
+					</tr>
+					<tr>
+						<td class="first_col">
+							<label for="summary">Summary</label>
+						</td>
+						<td class="second_col">
+							<textarea name="summary" id="summary" cols="90" rows="5"></textarea>
+						</td>	
+					</tr>	
+					</table>
+				<h2>Education</h2>
+				<div id="education" name="education" ed_number="1" class="education">
+					<table class="table_for_forms">
+						<tr>
+							<td class="first_col">
+								<label for="year_start">Year start</label>
+							</td>
+							<td class="second_col">	
+								<input type="date" name="year_start" min="1980-01-01" required>
+							</td><td></td>
+						</tr>
+						<tr>
+							<td class="first_col">
+								<label for="year_end">Year end</label>
+							</td>
+							<td class="second_col">		
+								<input type="date" name="year_end" required>
+							</td><td></td>
+						</tr>
+						<tr>
+							<td class="first_col">			
+								<label for="organization">Organization</label>
+							</td>
+							<td class="second_col">	
+								<input type="text" name="organization" size="40" required>
+							</td><td><button class='del_edu' id="del_edu" ed_number="1" name='del_edu' onclick="delete_education(document.getElementById('education'))">Delete</button></td>
+						</tr>
+						<tr>
+							<td class="first_col">
+								<label for="title">Title</label>
+							</td>
+							<td class="second_col">	
+								<input type="text" name="title" bsize="70" required>
+							</td><td></td>
+						</tr>
+						<tr>
+							<td class="first_col">
+								<label for="description">Description</label>
+							</td>
+							<td class="second_col">	
+								<input type="text" name="description" size="80" required><br>
+							</td><td></td>
+						</tr>
+					</table>
+				</div>
+				<button class='edu' id="edu" name='edu'>Add education</button><br><br>
+				<h2>Experience</h2>
+				<div id="experience" name="experience" class="experience">
+					<table class="table_for_forms">
+						<tr>
+							<td class="first_col">
+								<label for="ex_year_start">Year start</label>
+							</td>
+							<td class="second_col">		
+								<input type="date" name="ex_year_start" id="ex_year_start" min="1980-01-01" required>
+							</td><td></td>
+						</tr>
+						<tr>
+							<td class="first_col">
+								<label for="ex_year_end">Year end</label>
+							</td>
+							<td class="second_col">		
+								<input type="date" name="ex_year_end" id="ex_year_end" required>
+							</td><td></td>
+						</tr>
+						<tr>
+							<td class="first_col">
+								<label for="company">Company</label>
+							</td>
+							<td class="second_col">		
+								<input type="text" name="company" id="company" size="50" required>
+							</td><td><button class='del_exp' id="del_exp" name='del_exp'>Delete</button></td>
+						</tr>
+						<tr>
+							<td class="first_col">
+								<label for="position">Position</label>
+							</td>
+							<td class="second_col">		
+								<input type="text" name="position" id="position" size="50" required>
+							</td><td></td>
+						</tr>
+						<tr>
+							<td class="first_col">
+								<label for="ex_description">Description</label>
+							</td>
+							<td class="second_col">		
+								<input type="text" name="ex_description" id="ex_description" size="80" required>
+							</td><td></td>
+						</tr>
+					</table>
+				</div>
+				<button class='exp' id="exp" name='exp'>Add experience</button><br><br>
+				<input type="submit" value="Add resume">
+			</form>
+			{% endif %}
+			<br><br>
+	</div></div>
+	<div class="addition_information">
+		<div class="addition_information_inner">
+<p>Place for addition information.</p>
+	</div></div>
+</section> 
 
-<h1>Add new resume</h1>
-
-{% if status %}
-<p>{{ status }}</p>
-{% else %}
-<br><br>
-<form id="add_new_resume" action="{% url 'resume:addnew' %}" method="post">
-	{% csrf_token %}
-	<label for="first_name">First name</label>
-	<input type="text" name="first_name" id="first_name" required><br>
-	<label for="last_name">Last name</label>
-	<input type="text" name="last_name" id="last_name" required><br>
-	<label for="email">E-mail</label>
-	<input type="text" name="email" id="email" required><br>
-	<label for="phone">Phone</label>
-	<input type="text" name="phone" id="phone" required><br>
-	<label for="address">Address</label>
-	<input type="text" name="address" id="address" required><br>
-	<label for="city">City</label>
-	<input type="text" name="city" id="city" required><br>
-	<label for="state">State</label>
-	<input type="text" name="state" id="state" required><br>
-	<label for="country">Country</label>
-	<input type="text" name="country" id="country" required><br>
-	<label for="zip_code">Zip code</label>
-	<input type="text" name="zip_code" id="zip_code" required><br>
-	<label for="job_title">Job title</label>
-	<input type="text" name="job_title" id="job_title" required><br>
-	<label for="summary">Summary</label>
-	<textarea name="summary" id="summary" cols="50" rows="5"></textarea><br>
-	<p>Education</p>
-	<div id="education" name="education" class="education">
-		<label for="year_start">Year start</label>
-		<input type="date" name="year_start" id="year_start" min="1980-01-01" required>
-		<label for="year_end">Year end</label>
-		<input type="date" name="year_end" id="year_end" required><br>
-		<label for="organization">Organization</label>
-		<input type="text" name="organization" id="organization" required>
-		<label for="title">Title</label>
-		<input type="text" name="title" id="title" required><br>
-		<label for="description">Description</label>
-		<input type="text" name="description" id="description" required><br>
-	</div>
-	<button class='edu' id="edu" name='edu'>Add education</button><br><br>
-	<p>Experience</p>
-	<div id="experience" name="experience" class="experience">
-		<label for="ex_year_start">Year start</label>
-		<input type="date" name="ex_year_start" id="ex_year_start" min="1980-01-01" required>
-		<label for="ex_year_end">Year end</label>
-		<input type="date" name="ex_year_end" id="ex_year_end" required><br>
-		<label for="company">Company</label>
-		<input type="text" name="company" id="company" required>
-		<label for="position">Position</label>
-		<input type="text" name="position" id="position" required><br>
-		<label for="ex_description">Description</label>
-		<input type="text" name="ex_description" id="ex_description" required><br>
-	</div>
-	<button class='exp' id="exp" name='exp'>Add experience</button><br><br>
-	<input type="submit" value="Add resume">
-</form>
-{% endif %}
 {% endblock %}
+
+
+

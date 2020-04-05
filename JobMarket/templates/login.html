@@ -3,20 +3,45 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
+<section class="main_section">
+	<div class="content">
+		<div class="content_inner">
+			<h1>Login</h1>
+			{% if error %}
+			<p>{{ error }}</p>
+			{% endif %}
+			<form action="{% url 'login' %}" method="post">
+				{% csrf_token %}
+				<table class="table_for_forms">
+						<tr>
+							<td class="first_col">
+								<label for="username">Username</label>
+							</td>
+							<td class="second_col">	
+								<input type="text" name="username" id="username" required>
+							</td>
+						</tr>
+						<tr>
+							<td class="first_col">		
+								<label for="password">Password</label>
+							</td>
+							<td class="second_col">	
+								<input type="password" name="password" id="password" required>
+							</td>
+						</tr>
+						<tr>
+						<td colspan="2" style="text-align: center;">	
+							<input type="submit" value="Login">
+						</td>
+						</tr>
+					</table>
+			</form>
 
-<h1>Login</h1>
-<br><br>
-{% if error %}
-	<p>{{ error }}</p>
-{% endif %}
-<br><br>
-<form action="{% url 'login' %}" method="post">
-	{% csrf_token %}
-	<label for="username">Username</label>
-	<input type="text" name="username" id="username" required><br>
-	<label for="password">Password</label>
-	<input type="password" name="password" id="password" required><br>
-	<input type="submit" value="Login">
-</form>
+	</div></div>
+	<div class="addition_information">
+		<div class="addition_information_inner">
+			<p>Place for addition information.</p>
+	</div></div>
+</section> 
 
 {% endblock %}
