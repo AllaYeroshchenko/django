@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block title %}Resume details{% endblock %}
+
+{% block content %}
+<section class="main_section">
+	<div class="content">
+		<div class="content_inner">
+			<h1>Resume</h1>
+			<div class="resume_page">
+			<div class="contacts">
+				<div class="contacts_inner">
+					<p>✉ {{ resume.email }}</p>
+					<p>☎ {{ resume.phone }}</p>
+				</div>
+			</div>
+			<div class="title">
+				<h1>{{ resume.first_name }} {{ resume.last_name }}</h1>
+				<h2>{{ resume.job_title }}</h2>
+			</div>
+			<div class="divider">
+				<div class="divider_inner">SUMMARY</div>
+			</div>
+			<div class="infoblock">
+				<div class="infoblock_inner">
+					<p>{{ resume.summary }}</p>
+				</div>
+			</div>
+			{% if experience %}
+			<div class="divider">
+				<div class="divider_inner">EXPERIENCE</div>
+			</div>
+			{% for ex in experience %}
+			<div class="infoblock">
+				<div class="infoblock_inner">
+					<h2>{{ ex.company_name }}</h2>
+					<h2>{{ ex.position }}</h2>
+					<p>{{ ex.start_date|date:'m.d.Y' }} - {{ ex.end_date|date:'m.d.Y' }}</p>
+					<p>{{ ex.description }}</p>
+				</div>
+			</div>				
+			{% endfor %}
+			{% endif %}
+						{% if experience %}
+			<div class="divider">
+				<div class="divider_inner">EDUCATION</div>
+			</div>
+			{% for ed in education %}
+			<div class="infoblock">
+				<div class="infoblock_inner">
+					<h2>{{ ed.organization_name }}</h2>
+					<h2>{{ ed.title }}</h2>
+					<p>{{ ed.start_date|date:'m.d.Y' }} - {{ ed.end_date|date:'m.d.Y' }}</p>
+					<p>{{ ed.description }}</p>
+				</div>
+			</div>				
+			{% endfor %}
+			{% endif %}
+			</div>
+	
+	</div></div>
+	<div class="addition_information">
+		<div class="addition_information_inner">
+			<p>Place for addition information.</p>
+	</div></div>
+</section> 
+
+{% endblock %}

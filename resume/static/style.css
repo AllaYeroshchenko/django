@@ -2,6 +2,7 @@
 body {
     margin: 0px;
     padding: 0px;
+    color: #202070;
 }
 
 .wrapper {
@@ -105,7 +106,7 @@ body {
 }
 
 .main_section {
-    color: #000;
+    color: #202070;
     
 }
 
@@ -115,6 +116,7 @@ body {
  /*   background-color: violet;*/
     float:left;
  /*   border: solid 0px black;*/
+ position: relative;
 
 }
 
@@ -129,12 +131,16 @@ body {
 .content_inner {
  /*   border: solid 1px black;*/
     margin:20px;
-
+    position: relative;
 }
 
 .addition_information_inner {
   /*  border: solid 1px black;*/
     margin:20px;
+}
+
+.footer{
+
 }
 
 .footer_inner {
@@ -193,4 +199,92 @@ button: {
 .second_col {
     
     text-align: left;
+}
+
+.resume_page{
+    width: 800px;
+    border: solid 1px black;
+    margin: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.9), 0 6px 6px rgba(0, 0, 0, 0.2);
+    position: absolute; 
+}
+
+.resume_page h1{
+    font-size: 25px;
+    color: #202070;
+    margin: 20px;
+}
+
+.resume_page h2{
+    font-size: 20px;
+    margin: 20px;
+}
+
+.contacts{
+    width: 400px;
+    
+    float: left;
+    /*border: solid 1px black;*/  
+    position: relative;
+}
+
+.contacts_inner {
+    margin: 20px;
+    font-size: 18px;
+}
+
+.contacts_inner p{
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.title{
+    width: 400px;
+    
+    /*border: solid 1px black;*/
+    float: right;
+}
+
+.divider {
+    width: 100%;
+    background: linear-gradient(90deg, rgba(30,30,150,.8), rgba(50,50,200,0) 80%),
+            linear-gradient(127deg, rgba(0,255,0,.8), rgba(0,255,0,0) 70.71%),
+            linear-gradient(336deg, rgba(0,0,255,.8), rgba(0,0,255,0) 70.71%);
+    color: #ffffff;
+    position: relative;
+    clear: both;
+}
+
+.divider_inner{
+    padding: 5px 5px 5px 20px;
+    
+}
+
+.infoblock{
+
+}
+
+.infoblock_inner{
+    margin: 10px;
+}
+
+.infoblock_inner h2{
+    margin-left: 10px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+
+.infoblock_inner p{
+    margin-left: 10px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+
+
+.empty{
+    width: 100px;
+    height: 100px;
+    position: relative;
+    border: solid 1px black;
+    
 }

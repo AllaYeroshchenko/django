@@ -7,7 +7,19 @@
 	<div class="content">
 		<div class="content_inner">
 			<h1>Resume</h1>
+			{% if user.is_authenticated %}
 			<a href="{% url 'resume:addnew' %}">Add new resume</a>
+			<h2>Your resumes:</h2>
+			{% if resumes_list %}
+				{% for a in resumes_list %}
+					<p><a href="{% url 'resume:resume_details' a.id %}">{{ a.job_title }}</a></p>
+				{% endfor %}
+			{% else %}
+			<p>You don't have any resumes yet.</p>
+			{% endif %}
+			{% 	else %}
+			<p>If you want view or add new resume you should <a href="{% url 'login' %}">login</a> or <a href="{% url 'signup' %}">sign up.</a></p> 
+			{% endif %}	
 	</div></div>
 	<div class="addition_information">
 		<div class="addition_information_inner">

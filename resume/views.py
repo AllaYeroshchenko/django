@@ -9,7 +9,10 @@ from django.urls import reverse
 
 def index(request):
 	print("Hello This is resume page")
-	return render(request, 'resume/resume.html')
+	print(request.user.id)
+	resumes_list=Resume.objects.filter(user_id=request.user.id)
+	print(resumes_list)
+	return render(request, 'resume/resume.html', {'resumes_list': resumes_list})
 
 def addnew(request):
 	args={}
@@ -48,13 +51,14 @@ def addnew(request):
 		descriptions=request.POST.getlist('description', '')
 		ed_list=[]
 		for i in range(len(start_dates)):
-			ed=Education(start_date=start_dates[i], 
+			if start_dates[i]!="" and end_dates[i]!="" and organizations[i]!="" and titles[i]!="":
+				ed=Education(start_date=start_dates[i], 
 					end_date=end_dates[i], 
 					organization_name=organizations[i], 
 					title=titles[i], 
 					description=descriptions[i], 
 					resume_id=r)
-			ed_list.append(ed)
+				ed_list.append(ed)
 #### Experience		
 		ex_start_dates=request.POST.getlist('ex_year_start', '')
 		ex_end_dates=request.POST.getlist('ex_year_end', '')
@@ -63,13 +67,14 @@ def addnew(request):
 		ex_descriptions=request.POST.getlist('ex_description', '')
 		ex_list=[]
 		for i in range(len(ex_start_dates)):
-			ex=Experience(start_date=ex_start_dates[i], 
-					end_date=ex_end_dates[i], 
-					company_name=companies[i], 
-					position=positions[i], 
-					description=ex_descriptions[i], 
-					resume_id=r)
-			ex_list.append(ex)
+			if ex_start_dates[i]!="" and ex_end_dates[i]!="" and companies[i]!="" and positions[i]!="":
+				ex=Experience(start_date=ex_start_dates[i], 
+						end_date=ex_end_dates[i], 
+						company_name=companies[i], 
+						position=positions[i], 
+						description=ex_descriptions[i], 
+						resume_id=r)
+				ex_list.append(ex)
 
 		try:
 			r.save()
@@ -84,3 +89,10 @@ def addnew(request):
 	else:
 		return render(request, 'resume/addnew.html', args)
 
+
+def resume_details(request, resume_id):
+	resume=Resume.objects.get(id=resume_id)
+	experience=Experience.objects.filter(resume_id=resume_id)
+	education=Education.objects.filter(resume_id=resume_id)
+	print(experience)
+	return render(request, 'resume/resume_details.html', {'resume': resume, 'experience': experience, 'education': education})
