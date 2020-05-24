@@ -1,9 +1,16 @@
-let edu_box_global=document.getElementById('education1').innerHTML;
-let exp_box_global=document.getElementById('experience1').innerHTML;
+//let edu_box_global_it=document.getElementById('education_hidden');
+
+
+let edu_box_global=document.getElementById('education').innerHTML;
+
+let exp_box_global=document.getElementById('experience').innerHTML;
+
 edu_box_global.id="education_added";
-let edu_max_number=1;
 exp_box_global.id="experience_added";
-let exp_max_number=1;
+let edu_max_number=document.getElementsByClassName('education').length;
+let exp_max_number=document.getElementsByClassName('experience').length;
+
+
 let	btn_edu=document.getElementById('edu');
 let	btn_exp=document.getElementById('exp');
 
@@ -11,7 +18,7 @@ let	btn_exp=document.getElementById('exp');
 
 btn_edu.addEventListener('click', function(){
 	edu_max_number=edu_max_number+1;
-	let form_for_resume=document.getElementById('add_new_resume');
+	let form_for_resume=document.getElementById('resume_form');
 	edu_box=document.createElement('div');
 	edu_box.innerHTML=edu_box_global;
 	edu_box.id="education"+edu_max_number;
@@ -26,7 +33,7 @@ btn_edu.addEventListener('click', function(){
 
 btn_exp.addEventListener('click', function(){
 	exp_max_number=exp_max_number+1;
-	let form_for_resume=document.getElementById('add_new_resume');
+	let form_for_resume=document.getElementById('resume_form');
 	exp_box=document.createElement('div');
 	exp_box.innerHTML=exp_box_global;
 	exp_box.id="experience"+exp_max_number;
@@ -38,6 +45,7 @@ btn_exp.addEventListener('click', function(){
 	form_for_resume.insertBefore(exp_box, btn_exp);
 
 })
+
 
 
 

@@ -1,16 +1,16 @@
 {% extends 'base.html' %}
 
-{% block title %}Add new resume{% endblock %}
+{% block title %}Edit resume{% endblock %}
 
 {% block content %}
 <section class="main_section">
 	<div class="content">
 		<div class="content_inner">
-			<h1>Add new resume</h1>
+			<h1>Edit resume</h1>
 			{% if status %}
 			<p>{{ status }}</p>
 			{% else %}
-			<form id="resume_form" action="{% url 'resume:addnew' %}" method="post">
+			<form id="resume_form" action="{% url 'resume:editresume' resume.id %}" method="POST">
 				{% csrf_token %}
 				<table class="table_for_forms">
 					<tr>
@@ -18,7 +18,7 @@
 							<label for="first_name">First name</label>
 						</td>
 						<td class="second_col">
-							<input type="text" name="first_name" id="first_name" size="40" required>*
+							<input value="{{ resume.first_name }}" type="text" name="first_name" id="first_name" size="40" required>*
 						</td>
 					</tr>
 					<tr>
@@ -26,7 +26,7 @@
 							<label for="last_name">Last name</label>
 						</td>
 						<td class="second_col">
-							<input type="text" name="last_name" id="last_name"  size="60" required>*
+							<input value="{{ resume.last_name }}" type="text" name="last_name" id="last_name"  size="60" required>*
 						</td>
 					</tr>
 					<tr>
@@ -34,7 +34,7 @@
 							<label for="email">E-mail</label>
 						</td>
 						<td class="second_col">
-							<input type="text" name="email" id="email"  size="50" required>*
+							<input value="{{ resume.email }}" type="text" name="email" id="email"  size="50" required>*
 						</td>
 					</tr>
 					<tr>
@@ -42,7 +42,7 @@
 							<label for="phone">Phone</label>
 						</td>
 						<td class="second_col">
-							<input type="text" name="phone" id="phone" size="20" placeholder="+1-(XXX)-XXX-XX-XX">
+							<input value="{{ resume.phone }}" type="text" name="phone" id="phone" size="20" placeholder="+1-(XXX)-XXX-XX-XX">
 						</td>
 					</tr>
 					<tr>
@@ -50,7 +50,7 @@
 							<label for="address">Address</label>
 						</td>
 						<td class="second_col">
-							<input type="text" name="address" id="address" size="90">
+							<input value="{{ resume.address }}" type="text" name="address" id="address" size="90">
 						</td>
 					</tr>
 					<tr>
@@ -58,7 +58,7 @@
 							<label for="city">City</label>
 						</td>
 						<td class="second_col">
-							<input type="text" name="city" id="city" size="60">
+							<input value="{{ resume.city }}" type="text" name="city" id="city" size="60">
 						</td>
 					</tr>
 					<tr>
@@ -66,7 +66,7 @@
 							<label for="state">State</label>
 						</td>
 						<td class="second_col">
-							<input type="text" name="state" id="state" size="60">
+							<input value="{{ resume.state }}" type="text" name="state" id="state" size="60">
 						</td>
 					</tr>
 					<tr>
@@ -74,7 +74,7 @@
 							<label for="country">Country</label>
 						</td>
 						<td class="second_col">
-							<input type="text" name="country" id="country" size="60">
+							<input value="{{ resume.country }}" type="text" name="country" id="country" size="60">
 						</td>
 					</tr>
 					<tr>
@@ -82,7 +82,7 @@
 							<label for="zip_code">Zip code</label>
 						</td>
 						<td class="second_col">
-							<input type="text" name="zip_code" id="zip_code" size="7" maxlength="5">
+							<input value="{{ resume.zip_code }}" type="text" name="zip_code" id="zip_code" size="7" maxlength="5">
 						</td>
 					</tr>
 					<tr>
@@ -90,7 +90,7 @@
 							<label for="job_title">Job title</label>
 						</td>
 						<td class="second_col">
-							<input type="text" name="job_title" id="job_title" size="90" required>*
+							<input value="{{ resume.job_title }}" type="text" name="job_title" id="job_title" size="90" required>*
 						</td>
 					</tr>
 					<tr>
@@ -98,19 +98,22 @@
 							<label for="summary">Summary</label>
 						</td>
 						<td class="second_col">
-							<textarea name="summary" id="summary" cols="90" rows="5"></textarea>
+							<textarea name="summary" id="summary" cols="90" rows="5">{{ resume.summary }}</textarea>
 						</td>	
 					</tr>	
 					</table>
 				<h2>Education</h2>
-				<div id="education1" name="education1" class="education">
+				{% if education %}
+				{% for ed in education %}
+				{% with y=forloop.counter|stringformat:"s" %}
+				<div id="{{ 'education'|add:y }}" name="{{ 'education'|add:y }}" class="education">
 					<table class="table_for_forms">
 						<tr>
 							<td class="first_col">
 								<label for="year_start">Year start</label>
 							</td>
 							<td class="second_col">	
-								<input type="date" name="year_start" min="1980-01-01">*
+								<input value="{{ ed.start_date|date:'Y-m-d' }}" type="date" name="year_start" min="1980-01-01">*
 							</td><td></td>
 						</tr>
 						<tr>
@@ -118,7 +121,7 @@
 								<label for="year_end">Year end</label>
 							</td>
 							<td class="second_col">		
-								<input type="date" name="year_end">*
+								<input value="{{ ed.end_date|date:'Y-m-d' }}" type="date" name="year_end">*
 							</td><td></td>
 						</tr>
 						<tr>
@@ -126,15 +129,15 @@
 								<label for="organization">Organization</label>
 							</td>
 							<td class="second_col">	
-								<input type="text" name="organization" size="40">*
-							</td><td><button class='del_edu' id="del_edu1" name='del_edu1' onclick="delete_education(1)">Delete</button></td>
+								<input value="{{ ed.organization_name }}" type="text" name="organization" size="40">*
+							</td><td><button class='del_edu' id="{{ 'del_edu'|add:y }}" name="{{ 'del_edu'|add:y }}" onclick="delete_education({{ y }})">Delete</button></td>
 						</tr>
 						<tr>
 							<td class="first_col">
 								<label for="title">Title</label>
 							</td>
 							<td class="second_col">	
-								<input type="text" name="title" bsize="70">*
+								<input value="{{ ed.title }}" type="text" name="title" bsize="70">*
 							</td><td></td>
 						</tr>
 						<tr>
@@ -142,21 +145,29 @@
 								<label for="description">Description</label>
 							</td>
 							<td class="second_col">	
-								<input type="text" name="description" size="80"><br>
+								<input value="{{ ed.description }}" type="text" name="description" size="80"><br>
 							</td><td></td>
 						</tr>
 					</table>
 				</div>
+				
+				{% endwith %}
+				{% endfor %}
+				{% endif %}
 				<button class='edu' id="edu" name='edu' onclick="return false">Add education</button><br><br>
+
 				<h2>Experience</h2>
-				<div id="experience1" name="experience1" class="experience">
+				{% if experience %}
+				{% for ex in experience %}
+				{% with y=forloop.counter|stringformat:"s" %}
+				<div id="{{ 'experience'|add:y }}" name="{{ 'experience'|add:y }}" class="experience">
 					<table class="table_for_forms">
 						<tr>
 							<td class="first_col">
 								<label for="ex_year_start">Year start</label>
 							</td>
 							<td class="second_col">		
-								<input type="date" name="ex_year_start" id="ex_year_start" min="1980-01-01">*
+								<input type="date" value="{{ ex.start_date|date:'Y-m-d' }}" name="ex_year_start" id="ex_year_start" min="1980-01-01">*
 							</td><td></td>
 						</tr>
 						<tr>
@@ -164,7 +175,7 @@
 								<label for="ex_year_end">Year end</label>
 							</td>
 							<td class="second_col">		
-								<input type="date" name="ex_year_end" id="ex_year_end">*
+								<input type="date" value="{{ ex.end_date|date:'Y-m-d' }}" name="ex_year_end" id="ex_year_end">*
 							</td><td></td>
 						</tr>
 						<tr>
@@ -172,15 +183,15 @@
 								<label for="company">Company</label>
 							</td>
 							<td class="second_col">		
-								<input type="text" name="company" id="company" size="50">*
-							</td><td><button class='del_exp' id="del_exp1" name='del_exp1' onclick="delete_experience(1)">Delete</button></td>
+								<input type="text" value="{{ ex.company_name }}" name="company" id="company" size="50">*
+							</td><td><button class='del_exp' id="{{ 'del_exp'|add:y }}" name="{{ 'del_exp'|add:y }}" onclick="delete_experience({{ y }})">Delete</button></td>
 						</tr>
 						<tr>
 							<td class="first_col">
 								<label for="position">Position</label>
 							</td>
 							<td class="second_col">		
-								<input type="text" name="position" id="position" size="50">*
+								<input type="text" value="{{ ex.position }}" name="position" id="position" size="50">*
 							</td><td></td>
 						</tr>
 						<tr>
@@ -188,13 +199,16 @@
 								<label for="ex_description">Description</label>
 							</td>
 							<td class="second_col">		
-								<input type="text" name="ex_description" id="ex_description" size="80">
+								<input type="text" value="{{ ex.description }}" name="ex_description" id="ex_description" size="80">
 							</td><td></td>
 						</tr>
 					</table>
 				</div>
+				{% endwith %}
+				{% endfor %}
+				{% endif %}
 				<button class='exp' id="exp" name='exp' onclick="return false">Add experience</button><br><br>
-				<input type="submit" value="Add resume" form="resume_form">
+				<input type="submit" value="Edit resume" form="resume_form">
 			</form>
 			{% endif %}
 			<br><br>
@@ -295,8 +309,7 @@
 					</table>
 				</div>
 
-
 {% endblock %}
 
 
-
+				

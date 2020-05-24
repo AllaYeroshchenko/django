@@ -288,3 +288,7 @@ button: {
     border: solid 1px black;
     
 }
+
+.hidden{
+    display: none;
+}

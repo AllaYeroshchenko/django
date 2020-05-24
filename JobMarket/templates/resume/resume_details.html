@@ -7,7 +7,7 @@
 	<div class="content">
 		<div class="content_inner">
 			<h1>Resume</h1>
-			<div class="resume_page">
+			<div id="resume_page" class="resume_page">
 			<div class="contacts">
 				<div class="contacts_inner">
 					<p>✉ {{ resume.email }}</p>
@@ -41,7 +41,7 @@
 			</div>				
 			{% endfor %}
 			{% endif %}
-						{% if experience %}
+			{% if education %}
 			<div class="divider">
 				<div class="divider_inner">EDUCATION</div>
 			</div>
@@ -62,7 +62,27 @@
 	<div class="addition_information">
 		<div class="addition_information_inner">
 			<p>Place for addition information.</p>
+			<form id="edit_resume" action="{% url 'resume:editresume' resume.id %}" method="GET">
+				{% csrf_token %}
+				<input type="submit" value="Edit resume" form="edit_resume">			
+			</form>
+			<form id="delete_resume" action="{% url 'resume:deleteresume' resume.id %}" method="GET">
+				{% csrf_token %}
+				<input type="submit" value="Delete resume" form="delete_resume">			
+			</form>
+			<button id="topdf" onclick="generatePDF()">To Pdf</button>
 	</div></div>
 </section> 
+
+<script type="text/javascript">
+	delete_resume.addEventListener('click', function(event){
+	aa=confirm("Delete?");
+	if (aa != true){
+		event.preventDefault();
+	}
+	console.log(aa);
+})
+
+</script>
 
 {% endblock %}

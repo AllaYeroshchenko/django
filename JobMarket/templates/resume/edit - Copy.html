@@ -1,16 +1,16 @@
 {% extends 'base.html' %}
 
-{% block title %}Add new resume{% endblock %}
+{% block title %}Edit resume{% endblock %}
 
 {% block content %}
 <section class="main_section">
 	<div class="content">
 		<div class="content_inner">
-			<h1>Add new resume</h1>
+			<h1>Edit resume</h1>
 			{% if status %}
 			<p>{{ status }}</p>
 			{% else %}
-			<form id="resume_form" action="{% url 'resume:addnew' %}" method="post">
+			<form id="edit_resume" action="{% url 'resume:edit' %}" method="put">
 				{% csrf_token %}
 				<table class="table_for_forms">
 					<tr>
@@ -194,7 +194,7 @@
 					</table>
 				</div>
 				<button class='exp' id="exp" name='exp' onclick="return false">Add experience</button><br><br>
-				<input type="submit" value="Add resume" form="resume_form">
+				<input type="submit" value="Edit resume" form="edit_resume">
 			</form>
 			{% endif %}
 			<br><br>
@@ -204,97 +204,6 @@
 <p>Place for addition information.</p>
 	</div></div>
 </section> 
-
-<div id="education" name="education" class="hidden">
-					<table class="table_for_forms">
-						<tr>
-							<td class="first_col">
-								<label for="year_start">Year start</label>
-							</td>
-							<td class="second_col">	
-								<input type="date" name="year_start" min="1980-01-01">*
-							</td><td></td>
-						</tr>
-						<tr>
-							<td class="first_col">
-								<label for="year_end">Year end</label>
-							</td>
-							<td class="second_col">		
-								<input type="date" name="year_end">*
-							</td><td></td>
-						</tr>
-						<tr>
-							<td class="first_col">			
-								<label for="organization">Organization</label>
-							</td>
-							<td class="second_col">	
-								<input type="text" name="organization" size="40">*
-							</td><td><button class='del_edu' id="del_edu}" name="del_edu" onclick="delete_education(1)">Delete</button></td>
-						</tr>
-						<tr>
-							<td class="first_col">
-								<label for="title">Title</label>
-							</td>
-							<td class="second_col">	
-								<input type="text" name="title" bsize="70">*
-							</td><td></td>
-						</tr>
-						<tr>
-							<td class="first_col">
-								<label for="description">Description</label>
-							</td>
-							<td class="second_col">	
-								<input type="text" name="description" size="80"><br>
-							</td><td></td>
-						</tr>
-					</table>
-				</div>
-
-				<div id="experience" name="experience" class="hidden">
-					<table class="table_for_forms">
-						<tr>
-							<td class="first_col">
-								<label for="ex_year_start">Year start</label>
-							</td>
-							<td class="second_col">		
-								<input type="date" name="ex_year_start" id="ex_year_start" min="1980-01-01">*
-							</td><td></td>
-						</tr>
-						<tr>
-							<td class="first_col">
-								<label for="ex_year_end">Year end</label>
-							</td>
-							<td class="second_col">		
-								<input type="date" name="ex_year_end" id="ex_year_end">*
-							</td><td></td>
-						</tr>
-						<tr>
-							<td class="first_col">
-								<label for="company">Company</label>
-							</td>
-							<td class="second_col">		
-								<input type="text" name="company" id="company" size="50">*
-							</td><td><button class='del_exp' id="del_exp1" name='del_exp1' onclick="delete_experience(1)">Delete</button></td>
-						</tr>
-						<tr>
-							<td class="first_col">
-								<label for="position">Position</label>
-							</td>
-							<td class="second_col">		
-								<input type="text" name="position" id="position" size="50">*
-							</td><td></td>
-						</tr>
-						<tr>
-							<td class="first_col">
-								<label for="ex_description">Description</label>
-							</td>
-							<td class="second_col">		
-								<input type="text" name="ex_description" id="ex_description" size="80">
-							</td><td></td>
-						</tr>
-					</table>
-				</div>
-
 
 {% endblock %}
 
