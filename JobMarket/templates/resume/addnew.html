@@ -6,6 +6,7 @@
 <section class="main_section">
 	<div class="content">
 		<div class="content_inner">
+		{% if user.is_authenticated %}
 			<h1>Add new resume</h1>
 			{% if status %}
 			<p>{{ status }}</p>
@@ -202,6 +203,9 @@
 	<div class="addition_information">
 		<div class="addition_information_inner">
 <p>Place for addition information.</p>
+{% else %}
+<p>You should log in or sign up.</p>
+{% endif %}
 	</div></div>
 </section> 
 

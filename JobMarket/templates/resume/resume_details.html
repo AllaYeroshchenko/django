@@ -62,6 +62,7 @@
 	<div class="addition_information">
 		<div class="addition_information_inner">
 			<p>Place for addition information.</p>
+			{% if safety %}
 			<form id="edit_resume" action="{% url 'resume:editresume' resume.id %}" method="GET">
 				{% csrf_token %}
 				<input type="submit" value="Edit resume" form="edit_resume">			
@@ -70,7 +71,7 @@
 				{% csrf_token %}
 				<input type="submit" value="Delete resume" form="delete_resume">			
 			</form>
-			<button id="topdf" onclick="generatePDF()">To Pdf</button>
+			{% endif %}
 	</div></div>
 </section> 
 

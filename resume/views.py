@@ -78,27 +78,35 @@ def addnew(request):
 		try:
 			r.save()
 			for x in ed_list:
+				x.resume_id=r
 				x.save()
 			for y in ex_list:
+				y.resume_id=r
 				y.save()	
 			return render(request, 'resume/addnew.html', {'status': 'Resume was added'})
 		except:
-			render(request, 'resume/addnew.html', {'error': 'Something went wrong'})			
+			return render(request, 'resume/addnew.html', {'error': 'Something went wrong'})			
 
 	else:
 		return render(request, 'resume/addnew.html', args)
 
 
 def resume_details(request, resume_id):
+	if request.user == Resume.objects.get(id=resume_id).user_id:
+		safety=True;
+	else:
+		safety=False;		
 	resume=Resume.objects.get(id=resume_id)
 	experience=Experience.objects.filter(resume_id=resume_id)
 	education=Education.objects.filter(resume_id=resume_id)
-	return render(request, 'resume/resume_details.html', {'resume': resume, 'experience': experience, 'education': education})
+	return render(request, 'resume/resume_details.html', {'resume': resume, 'experience': experience, 'education': education, 'safety': safety})
 
 
 def editresume(request, resume_id):
 	args={}
 	args.update(csrf(request))
+	if request.user != Resume.objects.get(id=resume_id).user_id:
+		return render(request, 'resume/addnew.html', {'error': 'You don\'t have permission edit this page'})	
 	if request.POST.get('job_title', ''):
 		first_name=request.POST.get('first_name', '')
 		last_name=request.POST.get('last_name', '')
@@ -169,7 +177,7 @@ def editresume(request, resume_id):
 				y.save()	
 			return render(request, 'resume/addnew.html', {'status': 'Resume was edited'})
 		except:
-			render(request, 'resume/addnew.html', {'error': 'Something went wrong'})			
+			return render(request, 'resume/addnew.html', {'error': 'Something went wrong'})			
 
 	else:
 		resume=Resume.objects.get(id=resume_id)
@@ -184,5 +192,5 @@ def deleteresume(request, resume_id):
 		resume.delete()
 		return render(request, 'resume/delete.html', {'status': 'Resume was deleted'})
 	except:
-		render(request, 'resume/delete.html', {'error': 'Something went wrong'})	
+		return render(request, 'resume/delete.html', {'error': 'Something went wrong'})	
 	
