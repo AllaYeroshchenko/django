@@ -8,7 +8,7 @@ class Resume(models.Model):
 	last_name=models.CharField("Last name", max_length=70, null=True)
 	user_id=models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 	email=models.CharField("E-mail", max_length=50, null=True)
-	phone=models.CharField("Phone", max_length=12, null=True, blank=True)
+	phone=models.CharField("Phone", max_length=20, null=True, blank=True)
 	address=models.CharField("Address", max_length=200, null=True, blank=True)
 	city=models.CharField("City", max_length=40, null=True, blank=True)
 	state=models.CharField("State", max_length=40, null=True, blank=True)
