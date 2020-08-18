@@ -19,8 +19,10 @@ from . import views
 
 urlpatterns = [
 	path('resume/', include('resume.urls')),
-	path('search/', include('search.urls')),
-	path('statistic/', include('statistic.urls')),
+    path('automation', views.automation, name = 'automation'),
+    path('myresume', views.myresume, name = 'myresume'),
+	#path('search/', include('search.urls')),
+	#path('statistic/', include('statistic.urls')),
 	path('', views.index, name = 'index'),
 	path('login', views.login, name = 'login'),
 	path('logout', views.logout, name = 'logout'),

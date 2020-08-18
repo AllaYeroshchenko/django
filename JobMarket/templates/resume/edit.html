@@ -3,6 +3,8 @@
 {% block title %}Edit resume{% endblock %}
 
 {% block content %}
+{% load static %}
+<script type="text/javascript" src="{% get_static_prefix %}script_before.js"></script> 
 <section class="main_section">
 	<div class="content">
 		<div class="content_inner">
@@ -167,7 +169,7 @@
 								<label for="ex_year_start">Year start</label>
 							</td>
 							<td class="second_col">		
-								<input type="date" value="{{ ex.start_date|date:'Y-m-d' }}" name="ex_year_start" id="ex_year_start" min="1980-01-01">*
+								<input type="date" value="{{ ex.start_date|date:'Y-m-d' }}" name="ex_year_start" min="1980-01-01">*
 							</td><td></td>
 						</tr>
 						<tr>
@@ -175,7 +177,7 @@
 								<label for="ex_year_end">Year end</label>
 							</td>
 							<td class="second_col">		
-								<input type="date" value="{{ ex.end_date|date:'Y-m-d' }}" name="ex_year_end" id="ex_year_end">*
+								<input type="date" value="{{ ex.end_date|date:'Y-m-d' }}" name="ex_year_end">*
 							</td><td></td>
 						</tr>
 						<tr>
@@ -183,7 +185,7 @@
 								<label for="company">Company</label>
 							</td>
 							<td class="second_col">		
-								<input type="text" value="{{ ex.company_name }}" name="company" id="company" size="50">*
+								<input type="text" value="{{ ex.company_name }}" name="company" size="50">*
 							</td><td><button class='del_exp' id="{{ 'del_exp'|add:y }}" name="{{ 'del_exp'|add:y }}" onclick="delete_experience({{ y }})">Delete</button></td>
 						</tr>
 						<tr>
@@ -191,7 +193,7 @@
 								<label for="position">Position</label>
 							</td>
 							<td class="second_col">		
-								<input type="text" value="{{ ex.position }}" name="position" id="position" size="50">*
+								<input type="text" value="{{ ex.position }}" name="position" size="50">*
 							</td><td></td>
 						</tr>
 						<tr>
@@ -199,13 +201,14 @@
 								<label for="ex_description">Description</label>
 							</td>
 							<td class="second_col">		
-								<input type="text" value="{{ ex.description }}" name="ex_description" id="ex_description" size="80">
+								<input type="text" value="{{ ex.description }}" name="ex_description" size="80">
 							</td><td></td>
 						</tr>
 					</table>
 				</div>
 				{% endwith %}
 				{% endfor %}
+
 				{% endif %}
 				<button class='exp' id="exp" name='exp' onclick="return false">Add experience</button><br><br>
 				<input type="submit" value="Edit resume" form="resume_form">
@@ -215,7 +218,8 @@
 	</div></div>
 	<div class="addition_information">
 		<div class="addition_information_inner">
-<p>Place for addition information.</p>
+			<p><b>The random quote:</b></p>
+			<p>{{ quote }}</p>
 	</div></div>
 </section> 
 
@@ -308,7 +312,9 @@
 						</tr>
 					</table>
 				</div>
-
+{% if not status %}
+	<script type="text/javascript" src="{% get_static_prefix %}script.js"></script>
+{% endif %}	
 {% endblock %}
 
 

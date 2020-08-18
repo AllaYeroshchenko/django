@@ -61,13 +61,14 @@
 	</div></div>
 	<div class="addition_information">
 		<div class="addition_information_inner">
-			<p>Place for addition information.</p>
+			<p><b>The random quote:</b></p>
+			<p>{{ quote }}</p>
 			{% if safety %}
-			<form id="edit_resume" action="{% url 'resume:editresume' resume.id %}" method="GET">
+			<form id="edit_resume" action="{% url 'resume:editresume' resume.id %}" method="POST">
 				{% csrf_token %}
 				<input type="submit" value="Edit resume" form="edit_resume">			
 			</form>
-			<form id="delete_resume" action="{% url 'resume:deleteresume' resume.id %}" method="GET">
+			<form id="delete_resume" action="{% url 'resume:deleteresume' resume.id %}" method="POST">
 				{% csrf_token %}
 				<input type="submit" value="Delete resume" form="delete_resume">			
 			</form>

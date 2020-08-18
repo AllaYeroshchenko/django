@@ -4,18 +4,19 @@ from django.shortcuts import render
 from django.contrib.auth.models import User
 from .models import Resume, Education, Experience
 from django.utils import timezone
-
+from JobMarket import quotes
 from django.urls import reverse, NoReverseMatch
 
 def index(request):
 	print("Hello This is resume page")
 	print(request.user.id)
 	resumes_list=Resume.objects.filter(user_id=request.user.id)
-	return render(request, 'resume/resume.html', {'resumes_list': resumes_list})
+	return render(request, 'resume/resume.html', {'resumes_list': resumes_list, 'quote': quotes.get_random_quote()})
 
 def addnew(request):
 	args={}
 	args.update(csrf(request))
+	args['quote']=quotes.get_random_quote()
 	if request.POST:
 		first_name=request.POST.get('first_name', '')
 		last_name=request.POST.get('last_name', '')
@@ -83,9 +84,9 @@ def addnew(request):
 			for y in ex_list:
 				y.resume_id=r
 				y.save()	
-			return render(request, 'resume/addnew.html', {'status': 'Resume was added'})
+			return render(request, 'resume/addnew.html', {'status': 'Resume was added', 'quote': quotes.get_random_quote()})
 		except:
-			return render(request, 'resume/addnew.html', {'error': 'Something went wrong'})			
+			return render(request, 'resume/addnew.html', {'error': 'Something went wrong', 'quote': quotes.get_random_quote()})			
 
 	else:
 		return render(request, 'resume/addnew.html', args)
@@ -99,14 +100,15 @@ def resume_details(request, resume_id):
 	resume=Resume.objects.get(id=resume_id)
 	experience=Experience.objects.filter(resume_id=resume_id)
 	education=Education.objects.filter(resume_id=resume_id)
-	return render(request, 'resume/resume_details.html', {'resume': resume, 'experience': experience, 'education': education, 'safety': safety})
+	return render(request, 'resume/resume_details.html', {'resume': resume, 'experience': experience, 'education': education, 'safety': safety, 'quote': quotes.get_random_quote()})
 
 
 def editresume(request, resume_id):
 	args={}
 	args.update(csrf(request))
+	args['quote']=quotes.get_random_quote()
 	if request.user != Resume.objects.get(id=resume_id).user_id:
-		return render(request, 'resume/addnew.html', {'error': 'You don\'t have permission edit this page'})	
+		return render(request, 'resume/addnew.html', {'error': 'You don\'t have permission edit this page', 'quote': quotes.get_random_quote()})	
 	if request.POST.get('job_title', ''):
 		first_name=request.POST.get('first_name', '')
 		last_name=request.POST.get('last_name', '')
@@ -175,22 +177,22 @@ def editresume(request, resume_id):
 				x.save()
 			for y in ex_list:
 				y.save()	
-			return render(request, 'resume/addnew.html', {'status': 'Resume was edited'})
+			return render(request, 'resume/edit.html', {'status': 'Resume was edited', 'quote': quotes.get_random_quote()})
 		except:
-			return render(request, 'resume/addnew.html', {'error': 'Something went wrong'})			
+			return render(request, 'resume/edit.html', {'error': 'Something went wrong', 'quote': quotes.get_random_quote()})			
 
 	else:
 		resume=Resume.objects.get(id=resume_id)
 		experience=Experience.objects.filter(resume_id=resume_id)
 		education=Education.objects.filter(resume_id=resume_id)
-		return render(request, 'resume/edit.html', {'resume': resume, 'experience': experience, 'education': education})
+		return render(request, 'resume/edit.html', {'resume': resume, 'experience': experience, 'education': education, 'quote': quotes.get_random_quote()})
 
 
 def deleteresume(request, resume_id):
 	resume=Resume.objects.get(id=resume_id)
 	try: 
 		resume.delete()
-		return render(request, 'resume/delete.html', {'status': 'Resume was deleted'})
+		return render(request, 'resume/delete.html', {'status': 'Resume was deleted', 'quote': quotes.get_random_quote()})
 	except:
-		return render(request, 'resume/delete.html', {'error': 'Something went wrong'})	
+		return render(request, 'resume/delete.html', {'error': 'Something went wrong', 'quote': quotes.get_random_quote()})	
 	

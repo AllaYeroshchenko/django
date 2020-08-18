@@ -5,8 +5,7 @@
 	{% load static %}
 	<link rel="stylesheet" href="{% get_static_prefix %}style.css">
 	<link href="https://fonts.googleapis.com/css2?family=Gotu&display=swap" rel="stylesheet">
-	<link rel="icon" type="image/png" href="{% get_static_prefix %}rb.png" />
-	<script type="text/javascript" src="{% get_static_prefix %}script_before.js"></script> 
+	<link rel="icon" type="image/png" href="{% get_static_prefix %}rb.png" />	
 </head>
 <body>
 <div class="wrapper">
@@ -14,14 +13,16 @@
 <div class="header">
 <div class="header_inner">
 	<div class="for_logo">
-	<div class="logo">Resume</div><div class="logo" style="position: relative; top:10px;">Builder</div>		
+	<a href="{% url 'index' %}">
+	<div class="logo">Resume</div><div class="logo" style="position: relative; top:10px;">Builder</div>	
+	</a>	
 	</div>
 	<nav class="main_menu">
 		<div class="block_menu">
 			<ul>
-				<li class="menu"><a href="{% url 'resume:index' %}">RESUME</a></li>
-				<li class="menu"><a href="{% url 'search:index' %}">SEARCH</a></li>
-				<li class="menu"><a href="{% url 'statistic:index' %}">STATISTIC</a></li>	
+				<li class="menu"><a id="resume_app" href="{% url 'resume:index' %}">Resume</a></li>
+				<li class="menu"><a href="{% url 'automation' %}">QA Automation Project</a></li>
+				<li class="menu"><a target="_blank" href="{% url 'myresume' %}">My Resume</a></li>	
 			</ul>
 		</div>
 	</nav>
@@ -40,21 +41,12 @@
 <section class="main_section">
 	<div class="content">
 		<div class="content_inner">
-			<p>“The elevator to success is out of order. You’ll have to use the stairs, one step at a time.” Joe Girard</p>
-			<p>“I didn’t fail the test. I just found 100 ways to do it wrong.” Benjamin Franklin</p>
-			<p>“Always remember that you are unique – just like everybody else.” Unknown</p>
-			<p>Your limitation—it’s only your imagination.</p>
-			<p>Push yourself, because no one else is going to do it for you.</p>
-			<p>Success doesn’t just find you. You have to go out and get it.</p>
-			<p>The harder you work for something, the greater you’ll feel when you achieve it.</p>
-			<p>Don’t stop when you’re tired. Stop when you’re done.</p>
-			<p>It’s going to be hard, but hard does not mean impossible.</p>
-			<p>Sometimes we’re tested not to show our weaknesses, but to discover our strengths.</p>
-			<p>The key to success is to focus on goals, not obstacles.</p>
+			<p>Hello! My name is Alla. I'm a Software Engineer. </p>
 	</div></div>
 	<div class="addition_information">
 		<div class="addition_information_inner">
-			<p>Place for addition information.</p>
+			<p><b>The random quote:</b></p>
+			<p>{{ quote }}</p>
 	</div></div>
 </section> 
 {% endblock %}
@@ -64,7 +56,7 @@
 </footer> 
 </div>-->
 </div>	
-<script type="text/javascript" src="{% get_static_prefix %}script.js"></script>
+
 </body>
 </html>
 

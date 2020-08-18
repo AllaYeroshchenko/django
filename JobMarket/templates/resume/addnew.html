@@ -3,6 +3,8 @@
 {% block title %}Add new resume{% endblock %}
 
 {% block content %}
+{% load static %}
+<script type="text/javascript" src="{% get_static_prefix %}script_before.js"></script> 
 <section class="main_section">
 	<div class="content">
 		<div class="content_inner">
@@ -173,7 +175,7 @@
 								<label for="company">Company</label>
 							</td>
 							<td class="second_col">		
-								<input type="text" name="company" id="company" size="50">*
+								<input type="text" name="company" size="50">*
 							</td><td><button class='del_exp' id="del_exp1" name='del_exp1' onclick="delete_experience(1)">Delete</button></td>
 						</tr>
 						<tr>
@@ -181,7 +183,7 @@
 								<label for="position">Position</label>
 							</td>
 							<td class="second_col">		
-								<input type="text" name="position" id="position" size="50">*
+								<input type="text" name="position" size="50">*
 							</td><td></td>
 						</tr>
 						<tr>
@@ -189,7 +191,7 @@
 								<label for="ex_description">Description</label>
 							</td>
 							<td class="second_col">		
-								<input type="text" name="ex_description" id="ex_description" size="80">
+								<input type="text" name="ex_description" size="80">
 							</td><td></td>
 						</tr>
 					</table>
@@ -202,7 +204,8 @@
 	</div></div>
 	<div class="addition_information">
 		<div class="addition_information_inner">
-<p>Place for addition information.</p>
+			<p><b>The random quote:</b></p>
+			<p>{{ quote }}</p>
 {% else %}
 <p>You should log in or sign up.</p>
 {% endif %}
@@ -298,8 +301,9 @@
 						</tr>
 					</table>
 				</div>
-
-
+{% if not status %}
+	<script type="text/javascript" src="{% get_static_prefix %}script.js"></script>
+{% endif %}	
 {% endblock %}
 
 

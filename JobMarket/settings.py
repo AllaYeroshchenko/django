@@ -43,8 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'resume.apps.ResumeConfig',
-    'search.apps.SearchConfig',
-    'statistic.apps.StatisticConfig',
+
 ]
 
 MIDDLEWARE = [

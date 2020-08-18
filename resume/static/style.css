@@ -28,9 +28,8 @@ body {
     padding: 0px;
 }
 
-.for_logo {
-    margin-left: 20px;;
-    
+.for_logo a {
+    color:#ffffff;
 }
 
 .logo {
@@ -38,8 +37,9 @@ body {
     font-size: 22px;
     font-weight: 600;
     font-family: 'Gotu', sans-serif;
-     
+    margin-left: 10px;
 }
+
 
 .logo::first-letter{
     font-size: 28px;
@@ -59,8 +59,8 @@ body {
       display: inline; 
       padding-top: 5px;
       padding-bottom: 5px;
-      padding-left: 20px;
-      padding-right: 20px;
+      padding-left: 30px;
+      padding-right: 30px;
       color: #fff;
       font-family: 'Gotu', sans-serif;
       font-weight: 600;
@@ -153,6 +153,14 @@ body {
     left: 0; bottom: 0;
     padding: 5px;
 }
+
+.intro {
+    font-size: 24px;
+    color: #202070;
+    font-weight: 600;
+    padding-top: 80px;
+}
+
 
 h1 {
     font-size: 30px;

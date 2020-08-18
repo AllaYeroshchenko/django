@@ -4,16 +4,18 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from django.contrib import auth
 from django.template.context_processors import csrf
-
+#from quotes.quotes import Quotes
+from . import quotes
 
 def index(request):
 	print("Hello This is main page")
-	return render(request, 'resume\main.html')
+	return render(request, 'resume\main.html', {'quote': quotes.get_random_quote()})
 
 
 def login(request):
 	args={}
 	args.update(csrf(request))
+	args['quote']=quotes.get_random_quote()
 	if request.POST:
 		username=request.POST.get('username', '')
 		password=request.POST.get('password', '')
@@ -55,3 +57,12 @@ def signup(request):
 			return render(request, 'signup.html', {'error': "Something went wrong!"})
 	else:
 		return render(request, 'signup.html')	
+
+
+def automation(request):
+	return render(request, 'automation.html', {'quote': quotes.get_random_quote()})
+
+def myresume(request):
+	return render(request, 'myresume.html')
+
+
