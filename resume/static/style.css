@@ -132,6 +132,7 @@ body {
  /*   border: solid 1px black;*/
     margin:20px;
     position: relative;
+    font-size: 18px;
 }
 
 .addition_information_inner {

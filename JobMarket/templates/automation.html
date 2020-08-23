@@ -6,8 +6,58 @@
 <section class="main_section">
 	<div class="content">
 		<div class="content_inner">
-			<h1>QA Automation Framework</h1>
-			
+			<h1>QA Automation Project</h1>
+			<p>This is a project for automating testing the Resume Builder application. I built it using Python, test framework PyTest. The source code is <a href="https://github.com/AllaYeroshchenko/Django-Test-Automation">here</a>.</p>
+			<p>There are just three tests chacking the main functionality: adding a new resume, edit a random resume, and delete a random resume. But the project was built the way it will be easy to add new functionality. </p>
+			<h2>Test Add a New Resume</h2>
+			<p>This test is parametrized. It downloads the data from a JSON file and then runs a test for each resume from the file.</p>
+			<ol>
+				<li>Get the last resume id from the database.</li>
+				<li>Add a new resume.</li>
+				<li>Check that the page has a message "Resume was added".</li>
+				<li>Get a new last resume id from the database.</li>
+				<li>Check that the last resume id has changed.</li>
+				<li>Get a new resume record from the database using the new last resume id.</li>
+				<li>Check that the new resume record in the database is equal to the added data.</li>
+				<li>Get new education records from the database using the new last resume id.</li>
+				<li>Check that new education records in the database are equal to the added data.</li>
+				<li>Get new experience records from the database using the new last resume id.</li>
+				<li>Check that the new experience records in the database are equal to the added data.</li>
+			</ol>
+			<h2>Test Delete a Resume</h2>
+			<ol>
+				<li>Check the quantity of resumes for the current user in the database.</li>
+				<li>If the quantity is zero add a new resume.</li>
+				<li>Get the quantity of resumes before deleting.</li>
+				<li>Get a list of resumes from the web page.</li>
+				<li>Choose a random resume from the list.</li>
+				<li>Delete the random resume.</li>
+				<li>Get the quantity of resumes after deleting.</li>
+				<li>Check that the quantity of resume has decreased by 1.</li>
+				<li>Check that there are no records about the deleted resume in the database.</li>
+				<li>Check that there are no records about education connected with the deleted resume in the database.</li>
+				<li>Check that there are no records about experience connected with the deleted resume in the database.</li>
+			</ol>
+			<h2>Test Edit a Resume</h2>
+			<p>This test is parametrized. It downloads the data from a JSON file and then runs a test for each resume from the file. But there is just one resume in the example.</p>
+			<ol>
+				<li>Check the quantity of resumes for the current user in the database.</li>
+				<li>If the quantity is zero add a new resume.</li>
+				<li>Get the quantity of resumes before deleting.</li>
+				<li>Get a list of resumes from the web page.</li>
+				<li>Choose a random resume from the list.</li>
+				<li>Edit the random resume with new data.</li>
+				<li>Check that the page has a message "Resume was edited".</li>
+				<li>Get the quantity of resumes for the current user in the database after deleting.</li>
+				<li>Check that the quantity of resumes hasn’t changed. </li>
+				<li>Get an edited resume record from the database using the random resume id.</li>
+				<li>Check that the edited resume record in the database is equal to the data for editing.</li>
+				<li>Get edited education records from the database using the random resume id.</li>
+				<li>Check that the edited education records in the database are equal to the data for editing.</li>
+				<li>Get edited experience records from the database using the random resume id.</li>
+				<li>Check that the edited experience records in the database are equal to the data for editing.</li>
+			</ol>	
+
 	</div></div>
 	<div class="addition_information">
 		<div class="addition_information_inner">
